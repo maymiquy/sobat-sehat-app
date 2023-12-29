@@ -15,7 +15,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="bg-gray-100">
+    <div class="bg-gray-200 min-h-screen">
         <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between h-16">
@@ -168,12 +168,11 @@
                 </div>
             @endguest
         </nav>
-    </div>
 
-    <!-- Page Content -->
-    <main class="min-h-screen w-auto bg-neutral-400">
-        {{ $slot }}
-    </main>
+        <!-- Page Content -->
+        <main>
+            {{ $slot }}
+        </main>
     </div>
 </body>
 
