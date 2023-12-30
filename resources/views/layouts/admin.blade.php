@@ -17,7 +17,7 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="min-h-screen bg-gray-100">
+    <div class="bg-gray-100 min-h-screen">
         <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
             <!-- Primary Navigation Menu -->
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -34,6 +34,12 @@
                         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                             <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                                 {{ __('Dashboard') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('news.index')" :active="request()->routeIs(['news.index', 'news.create', 'news.edit'])">
+                                {{ __('Berita') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs(['news.index', 'news.create', 'news.edit'])">
+                                {{ __('Kegiatan') }}
                             </x-nav-link>
                         </div>
                     </div>
@@ -62,7 +68,9 @@
                                 <div
                                     class="block h-full w-full px-4 py-2 font-bold text-start text-sm text-gray-900 focus:outline-none transition duration-150 ease-in-out border-b border-gray-200 border-separate">
                                     Logging as: {{ Auth::user()->role }}</div>
-
+                                <x-dropdown-link :href="route('home')">
+                                    {{ __('Kembali ke Beranda') }}
+                                </x-dropdown-link>
                                 <!-- Authentication -->
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
