@@ -1,3 +1,17 @@
+<?php
+use App\Models\News;
+
+$itemsPage = 5;
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+$start = ($page - 1) * $itemsPage;
+$news = News::skip($start)
+    ->take($itemsPage)
+    ->get();
+$total = News::count();
+$totalPages = ceil($total / $itemsPage);
+?>
+
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -5,28 +19,19 @@
         </h2>
     </x-slot>
 
+    <div class="flex justify-center items-center my-3">
+        @if (session('success'))
+            <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 3000)" x-show="show"
+                class="bg-green-600 rounded-md text-white text-center p-2">
+                {{ session('success') }}
+            </div>
+        @endif
+    </div>
+
     <div class="container mx-auto px-4 sm:px-8">
         <div class="py-8">
             <div class="flex flex-row justify-between">
                 <div class="my-2 flex sm:flex-row flex-col">
-                    <div class="flex flex-row mb-1 sm:mb-0">
-                        <div class="relative">
-                            <select
-                                class="appearance-none h-full rounded-l border block w-full bg-white border-gray-400 text-gray-700 py-2 px-4 pr-8 leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
-                                <option>5</option>
-                                <option>10</option>
-                                <option>20</option>
-                            </select>
-                            <div
-                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 20 20">
-                                    <path
-                                        d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
                     <div class="block relative">
                         <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
                             <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
@@ -39,7 +44,6 @@
                             class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                     </div>
                 </div>
-
                 <div class="flex p-2">
                     <a class="select-none max-w-fit rounded-lg bg-green-600 py-3 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                         href="{{ route('news.create') }}">
@@ -109,16 +113,23 @@
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-4">
-                                        <a href="">
+                                        <a href="{{ route('news.edit', $newsItem->id) }}">
                                             <button
-                                                class="text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+                                                class="inline-block text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
                                                 Edit
                                             </button>
                                         </a>
-                                        <button
-                                            class="text-sm bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded">
-                                            Delete
-                                        </button>
+                                        <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST"
+                                            class="inline-block">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button
+                                                class="text-sm bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+                                                type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
                                     </td>
 
                                 </tr>
@@ -127,17 +138,33 @@
                     </table>
                     <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
                         <span class="text-xs xs:text-sm text-gray-900">
-                            Showing 1 to 4 of 50 Entries
+                            Showing {{ $page }} of {{ $totalPages }} pages
                         </span>
                         <div class="inline-flex mt-2 xs:mt-0">
-                            <button
-                                class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
-                                Prev
-                            </button>
-                            <button
-                                class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
-                                Next
-                            </button>
+                            @if ($page > 1)
+                                <a href="{{ url()->current() }}?page={{ $page - 1 }}"
+                                    class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
+                                    Prev
+                                </a>
+                            @else
+                                <button
+                                    class="text-sm bg-gray-200 text-gray-400 font-semibold py-2 px-4 rounded-l cursor-not-allowed"
+                                    disabled>
+                                    Prev
+                                </button>
+                            @endif
+                            @if ($page < $totalPages)
+                                <a href="{{ url()->current() }}?page={{ $page + 1 }}"
+                                    class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
+                                    Next
+                                </a>
+                            @else
+                                <button
+                                    class="text-sm bg-gray-200 text-gray-400 font-semibold py-2 px-4 rounded-r cursor-not-allowed"
+                                    disabled>
+                                    Next
+                                </button>
+                            @endif
                         </div>
                     </div>
                 </div>

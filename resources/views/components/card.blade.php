@@ -18,7 +18,7 @@
             </h5>
         @else
             <h5
-                class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
+                class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased line-clamp-1 text-justify">
                 {{ $title }}
             </h5>
         @endif
@@ -27,9 +27,11 @@
                 {{ $description }}
             </p>
         @else
-            <p class="block font-sans text-base font-light leading-relaxed text-inherit antialiased">
-                {{ $description }}
-            </p>
+            <div class="block font-sans text-xs font-light leading-relaxed text-inherit antialiased">
+                <p class="line-clamp-3 text-justify">
+                    {{ $description }}
+                </p>
+            </div>
         @endempty
     </div>
     @empty($created_at)

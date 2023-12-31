@@ -38,7 +38,7 @@
                             <x-nav-link :href="route('news.index')" :active="request()->routeIs(['news.index', 'news.create', 'news.edit'])">
                                 {{ __('Berita') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs(['news.index', 'news.create', 'news.edit'])">
+                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs(['activity.index', 'activity.create', 'activity.edit'])">
                                 {{ __('Kegiatan') }}
                             </x-nav-link>
                         </div>
