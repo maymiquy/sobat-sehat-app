@@ -54,22 +54,34 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $validatedData = $request->validate([
-            'title' => 'required',
-            'image' => 'nullable|image',
-            'description' => 'required',
-            'created_at' => 'required|date',
-            'updated_at' => 'required|date',
+            'title' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'description' => 'nullable|string',
+            'created_at' => 'nullable|date',
+            'updated_at' => 'nullable|date',
         ]);
 
-        if ($request->hasFile('image')) {
-            Storage::disk('public')->delete('images/' . $news->image);
-            $image = $request->file('image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
-            $image->storeAs('images', $filename, 'public');
-            $validatedData['image'] = $filename;
+        if (!$request->filled('title')) {
+            $validatedData['title'] = $news->title;
         }
 
-        return redirect()->route('admin.news.index')->with('success', 'News item updated successfully.');
+        if (!$request->filled('description')) {
+            $validatedData['description'] = $news->description;
+        }
+
+        if ($image = $request->file('image')) {
+            $path = 'assets/images/';
+            if (file_exists($path . $validatedData['image'])) {
+                unlink($path . $validatedData['image']);
+            }
+            $imageName = date('YmdHis') . "." . $image->getClientOriginalExtension();
+            $image->move($path, $imageName);
+            $validatedData['image'] = "$imageName";
+        }
+
+        $news->update($validatedData);
+
+        return redirect()->route('news.index')->with('success', 'News item updated successfully.');
     }
 
     public function destroy(News $news)
