@@ -38,7 +38,7 @@
                             <x-nav-link :href="route('news.index')" :active="request()->routeIs(['news.index', 'news.create', 'news.edit'])">
                                 {{ __('Berita') }}
                             </x-nav-link>
-                            <x-nav-link :href="route('dashboard')" :active="request()->routeIs(['activity.index', 'activity.create', 'activity.edit'])">
+                            <x-nav-link :href="route('events.index')" :active="request()->routeIs(['events.index', 'events.create', 'events.edit'])">
                                 {{ __('Kegiatan') }}
                             </x-nav-link>
                         </div>
@@ -108,6 +108,12 @@
                     <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('news')">
+                        {{ __('Berita') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('events')">
+                        {{ __('Kegiatan') }}
+                    </x-responsive-nav-link>
                 </div>
 
                 <!-- Responsive Settings Options -->
@@ -115,6 +121,12 @@
                     <div class="px-4">
                         <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
                         <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                    </div>
+
+                    <div class="mt-3 space-y-1">
+                        <x-responsive-nav-link :href="route('home')">
+                            {{ __('Kembali ke beranda') }}
+                        </x-responsive-nav-link>
                     </div>
 
                     <div class="mt-3 space-y-1">
