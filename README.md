@@ -7,47 +7,75 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## SOBAT SEHAT APP
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+SOBAT SEHAT APP is a health news and information website designed to bridge health contributors with opportunities to participate in creating events or activities beneficial to the community. It serves as a reliable platform where users can stay informed about health-related topics and engage with health professionals and enthusiasts who are keen on making a positive impact on public well-being.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Development by easing common tasks used in many web projects Laravel, such as:
+
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
-## Learning Laravel
+## Tech Stack
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+-   **[Laravel Breeze](https://laravel.com/docs/starter-kits#laravel-breeze)** - A simple, minimalistic starter kit for building a Laravel application with authentication.
+-   **[Blade](https://laravel.com/docs/blade)** - The simple, yet powerful templating engine provided with Laravel.
+-   **[Tailwind CSS](https://tailwindcss.com/)** - A utility-first CSS framework for rapidly building custom designs.
+-   Additional packages that enhance the Laravel experience:
+    -   **[Laravel Sanctum](https://laravel.com/docs/sanctum)** - For API token authentication.
+    -   **[Laravel Tinker](https://laravel.com/docs/tinker)** - For interacting with your application in the console.
+    -   **[Guzzle](https://docs.guzzlephp.org/)** - A PHP HTTP client that makes it easy to send HTTP requests and trivial to integrate with web services.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## Running in local
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clone repository:
 
-## Laravel Sponsors
+```bash
+git clone https://github.com/laravel/sobat-sehat-kedondong-app.git
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+2. Install composer dependencies:
 
-### Premium Partners
+```bash
+composer install
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+3. Install npm dependencies:
+
+```bash
+npm install
+```
+
+4. Setup `.env` file this similiar `.env.example` file:
+
+```bash
+cp .env.example .env
+```
+
+5. Migrate database:
+
+```bash
+php artisan migrate
+```
+
+6. Run server:
+
+```bash
+php artisan serve
+```
+
+&
+
+```bash
+npm run dev
+```
 
 ## Contributing
 
