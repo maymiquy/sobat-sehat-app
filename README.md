@@ -4,8 +4,6 @@ SOBAT SEHAT APP
 
 <p align="center">
 <a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
@@ -44,7 +42,7 @@ Laravel is accessible, powerful, and provides tools required for large, robust a
     - Clone with following command:
 
 ```bash
-git clone https://github.com/maymiquy/sobat-sehat-kedondong-app.git
+git clone https://github.com/maymiquy/sobat-sehat-app.git
 ```
 
 2. Install composer dependencies:
