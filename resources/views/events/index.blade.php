@@ -64,7 +64,7 @@ $totalPages = ceil($total / $itemsPage);
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                                    Waktu Durasi Kegiatan
+                                    Waktu Mulai Kegiatan
                                 </th>
                                 <th
                                     class="px-5 py-3 border-b-2 border-gray-200 bg-gray-300 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">

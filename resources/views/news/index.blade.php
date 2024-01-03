@@ -32,17 +32,6 @@ $totalPages = ceil($total / $itemsPage);
         <div class="py-8">
             <div class="flex flex-row justify-between">
                 <div class="my-2 flex sm:flex-row flex-col">
-                    <div class="block relative">
-                        <span class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                            <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
-                                <path
-                                    d="M10 4a6 6 0 300 12 6 6 0 000-12zm-8 6a8 8 0 1114.32 4.906l5.387 5.387a1 1 0 01-1.414 1.414l-5.387-5.387A8 8 0 012 10z">
-                                </path>
-                            </svg>
-                        </span>
-                        <input placeholder="Search"
-                            class="appearance-none rounded-r rounded-l sm:rounded-l-none border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-sm placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-                    </div>
                 </div>
                 <div class="flex p-2">
                     <a class="select-none max-w-fit rounded-lg bg-green-600 py-3 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-white shadow-md shadow-green-500/20 transition-all hover:shadow-lg hover:shadow-green-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
@@ -97,7 +86,8 @@ $totalPages = ceil($total / $itemsPage);
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="px-5 py-5 border-b border-gray-200 bg-white w-60 overflow-hidden">
+                                    <td
+                                        class="px-2 py-5 border-b min-w-[200px] w-auto border-gray-200 bg-white overflow-hidden">
                                         <p class="text-gray-900 text-xs whitespace-no-wrap">
                                             {{ $newsItem->description }}
                                         </p>
@@ -113,23 +103,25 @@ $totalPages = ceil($total / $itemsPage);
                                         </p>
                                     </td>
                                     <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm space-x-4">
-                                        <a href="{{ route('news.edit', $newsItem->id) }}">
-                                            <button
-                                                class="inline-block text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
-                                                Edit
-                                            </button>
-                                        </a>
-                                        <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST"
-                                            class="inline-block">
-                                            @csrf
-                                            @method('DELETE')
+                                        <div class="flex flex-row space-x-4">
+                                            <a href="{{ route('news.edit', $newsItem->id) }}">
+                                                <button
+                                                    class="inline-block text-sm bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded">
+                                                    Edit
+                                                </button>
+                                            </a>
+                                            <form action="{{ route('news.destroy', $newsItem->id) }}" method="POST"
+                                                class="inline-block">
+                                                @csrf
+                                                @method('DELETE')
 
-                                            <button
-                                                class="text-sm bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
-                                                type="submit">
-                                                Delete
-                                            </button>
-                                        </form>
+                                                <button
+                                                    class="text-sm bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded"
+                                                    type="submit">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </div>
                                     </td>
 
                                 </tr>

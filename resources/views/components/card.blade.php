@@ -18,7 +18,7 @@
             </h5>
         @else
             <h5
-                class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased line-clamp-1 text-justify">
+                class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased overflow-hidden text-ellipsis text-justify whitespace-nowrap">
                 {{ $title }}
             </h5>
         @endif
