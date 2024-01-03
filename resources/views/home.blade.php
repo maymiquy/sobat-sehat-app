@@ -14,7 +14,7 @@ $totalPages = ceil($total / $itemsPage);
 
 <x-guest-layout>
     <div class="container mx-auto py-8 space-y-4">
-        <div class="flex mx-auto items-center w-fit bg-white p-3 rounded-md shadow-sm">
+        <div class="flex mx-auto items-center w-fit bg-white p-3 rounded-md drop-shadow-md">
             <h1 class="text-3xl">Informasi & Berita Kesehatan</h1>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full p-4 gap-4">
@@ -24,7 +24,8 @@ $totalPages = ceil($total / $itemsPage);
             @endforeach
         </div>
 
-        <div class="px-5 py-5 bg-white border-t flex flex-col xs:flex-row items-center xs:justify-between">
+        <div
+            class="px-5 py-5 bg-white shadow-md border-t flex flex-col xs:flex-row rounded-md items-center xs:justify-between">
             <span class="text-xs xs:text-sm text-gray-900">
                 Showing {{ $page }} of {{ $totalPages }} pages
             </span>

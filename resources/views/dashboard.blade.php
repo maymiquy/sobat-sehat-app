@@ -8,7 +8,7 @@
     <div class="pt-24 pb-12 w-full flex justify-center items-center">
         <div class="max-w-7xl grid grid-cols-1 sm:grid-cols-2 gap-28 mx-auto">
             <x-card :title="__('Berita')" image="" description="" created_at="" :button_variant="__('manage')" :url="route('news.index')" />
-            <x-card :title="__('Kegiatan')" image="" description="" created_at="" :button_variant="__('manage')" :url="route('news.index')" />
+            <x-card :title="__('Kegiatan')" image="" description="" created_at="" :button_variant="__('manage')" :url="route('events.index')" />
         </div>
     </div>
 </x-admin-layout>

@@ -159,6 +159,15 @@
             {{ $slot }}
         </main>
     </div>
+
+    <script>
+        function showSelectedFileName(event) {
+            const input = event.target;
+            const fileName = input.files[0].name;
+            const fileNameElement = document.getElementById("file-name");
+            fileNameElement.textContent = fileName;
+        }
+    </script>
 </body>
 
 </html>
