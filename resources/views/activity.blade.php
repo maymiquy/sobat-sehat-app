@@ -199,14 +199,14 @@
                             class="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                             onchange="showSelectedFileName(event)">
                         <div class="flex items-center">
-                            <svg class="w-6 h-6 text-gray-400" fill="none" stroke="currentColor"
+                            <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                             </svg>
-                            <span id="file-name" class="ml-2 text-sm text-gray-400">Choose or drop images file</span>
+                            <span id="file-name" class="ml-2 text-sm text-gray-500">Choose or drop image</span>
                         </div>
-                        <span class="text-sm text-gray-500">Max size: 3MB</span>
+                        <span class="ml-6 text-sm text-gray-500"> Max size: 3MB</span>
                     </div>
                 </div>
                 <div class="mb-6">
@@ -221,7 +221,7 @@
                         :</label>
                     <input type="time" id="event_time" name="event_time"
                         class="w-full border-2 border-gray-400 rounded-md px-4 py-2 leading-5 transition duration-150 ease-in-out sm:text-sm sm:leading-5 resize-none focus:outline-none focus:border-blue-500"
-                        placeholder="Durasi kegiatan...">
+                        placeholder="Waktu kegiatan ...">
                 </div>
                 <div class="mb-6">
                     <label for="location" class="block text-gray-700 text-sm font-bold mb-2">Lokasi Kegiatan :</label>
