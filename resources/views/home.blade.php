@@ -14,7 +14,7 @@
             </div>
         </div>
         <button @click="activeSlide = (activeSlide === 0) ? {{ $slideItems->take(3)->count() - 1 }} : activeSlide - 1"
-            class="absolute top-0 start-40 z-10 py-6 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+            class="absolute top-0 start-[134px] z-10 py-6 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
             <span
                 class="inline-flex items-center justify-center w-10 h-full rounded-l-xl bg-neutral-100 group-hover:bg-white group-focus:outline-none hover:drop-shadow-lg text-gray-400 hover:text-gray-600 focus:text-gray-800">
                 <svg class="w-4 h-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -26,7 +26,7 @@
             </span>
         </button>
         <button @click="activeSlide = (activeSlide === {{ $slideItems->take(3)->count() - 1 }}) ? 0 : activeSlide + 1"
-            class="absolute top-0 end-40 z-10 py-6 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
+            class="absolute top-0 end-[134px] z-10 py-6 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none">
             <span
                 class="inline-flex items-center justify-center w-10 h-full rounded-r-xl bg-neutral-100 group-hover:bg-white group-focus:outline-none hover:drop-shadow-lg text-gray-400 hover:text-gray-600 focus:text-gray-800">
                 <svg class="w-4 h-4 rtl:rotate-180" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -53,32 +53,58 @@
 
         <div
             class="px-5 py-5 bg-white shadow-md border-t flex flex-col xs:flex-row rounded-md items-center xs:justify-between">
-            <span class="text-xs xs:text-sm text-gray-900">
-                Showing {{ $page }} of {{ $totalPages }} pages
-            </span>
-            <div class="inline-flex mt-2 xs:mt-0">
+            <div class="inline-flex items-center space-x-4 mt-2 xs:mt-0">
                 @if ($page > 1)
                     <a href="{{ url()->current() }}?page={{ $page - 1 }}"
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-l">
-                        Prev
+                        class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+                        type="button">
+                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                            </svg>
+                        </span>
                     </a>
                 @else
-                    <button
-                        class="text-sm bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-l cursor-not-allowed"
-                        disabled>
-                        Prev
+                    <button disabled
+                        class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+                        type="button">
+                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"></path>
+                            </svg>
+                        </span>
                     </button>
                 @endif
+                <span class="text-xs xs:text-sm font-semibold font-sans text-gray-700">
+                    Show page {{ $page }} of {{ $totalPages }}
+                </span>
                 @if ($page < $totalPages)
                     <a href="{{ url()->current() }}?page={{ $page + 1 }}"
-                        class="text-sm bg-gray-300 hover:bg-gray-400 text-gray-800 font-semibold py-2 px-4 rounded-r">
-                        Next
+                        class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+                        type="button">
+                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                            </svg>
+                        </span>
                     </a>
                 @else
-                    <button
-                        class="text-sm bg-gray-200 text-gray-800 font-semibold py-2 px-4 rounded-r cursor-not-allowed"
-                        disabled>
-                        Next
+                    <button disabled
+                        class="relative h-8 max-h-[32px] w-8 max-w-[32px] select-none rounded-lg border border-gray-900 text-center align-middle font-sans text-xs font-medium uppercase text-gray-900 transition-all hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-none"
+                        type="button">
+                        <span class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                                stroke="currentColor" aria-hidden="true" class="w-4 h-4">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"></path>
+                            </svg>
+                        </span>
                     </button>
                 @endif
             </div>

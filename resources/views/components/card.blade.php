@@ -2,7 +2,7 @@
 
 <div class="relative flex flex-col max-w-md rounded-md bg-white bg-clip-border text-gray-700 shadow-md pb-4">
     @empty($image)
-        <div class="relative h-10 w-56 overflow-hidden rounded-t-md bg-blue-gray-500 bg-clip-border text-white">
+        <div class="relative h-10 w-56 overflow-hidden rounded-t-md bg-white bg-clip-border text-white">
             <img src="{{ $image }}" alt="img" layout="fill" class="hidden" />
         </div>
     @else
