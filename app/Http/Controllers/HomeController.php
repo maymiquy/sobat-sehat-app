@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Member;
 use App\Models\Event;
 use App\Models\News;
 use Illuminate\Http\Request;
@@ -32,7 +33,8 @@ class HomeController extends Controller
         $page = $request->input('page', 1);
         $start = ($page - 1) * $itemsPage;
 
-        $events = Event::skip($start)
+        $events = Event::withCount('members')
+            ->skip($start)
             ->take($itemsPage)
             ->get();
 
@@ -70,6 +72,22 @@ class HomeController extends Controller
         $event->save();
 
         return redirect()->route('kegiatan')->with('success', 'Activity schedule created successfully.');
+    }
+
+    public function storeMember(Request $request)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+        ]);
+
+        $member = new Member($validatedData);
+
+        $member->event_id = $request->event_id;
+        $member->save();
+
+        return redirect()->route('kegiatan')->with('success', 'Anda berhasil join kegiatan ini');
     }
 
     public function searchEvent(Request $request)

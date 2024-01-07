@@ -21,6 +21,7 @@ use App\Http\Controllers\NewsController;
 Route::get('/', [HomeController::class, 'indexNews'])->name('home');
 Route::get('/kegiatan', [HomeController::class, 'indexEvent'])->name('kegiatan');
 Route::post('/kegiatan', [HomeController::class, 'storeEvent'])->name('kegiatan.store');
+Route::post('/kegiatan/peserta', [HomeController::class, 'storeMember'])->name('peserta.store');
 Route::get('/search', [HomeController::class, 'searchEvent'])->name('kegiatan.search');
 
 Route::get('/dashboard', function () {
