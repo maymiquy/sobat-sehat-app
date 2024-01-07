@@ -1,17 +1,3 @@
-<?php
-use App\Models\News;
-$slideItems = News::whereIn('id', [1, 2, 4])->get();
-$itemsPage = 6;
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-$start = ($page - 1) * $itemsPage;
-$news = News::skip($start)
-    ->take($itemsPage)
-    ->get();
-$total = News::count();
-$totalPages = ceil($total / $itemsPage);
-?>
-
 <x-guest-layout>
     <div x-data="{ activeSlide: 0, autoPlay: true }" x-init="startSlideAutoPlay()" class="relative mb-6">
         <div class="overflow-hidden px-14 sm:px-48 py-6">

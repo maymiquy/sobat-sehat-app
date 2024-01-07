@@ -11,18 +11,19 @@ class HomeController extends Controller
 {
     public function indexNews(Request $request)
     {
-        $itemsPage = 5;
-        $page = $request->input('page', 1);
-        $start = ($page - 1) * $itemsPage;
+        $slideItems = News::whereIn('id', [1, 2, 4])->get();
 
-        $events = Event::skip($start)
+        $itemsPage = 6;
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+        $start = ($page - 1) * $itemsPage;
+        $news = News::skip($start)
             ->take($itemsPage)
             ->get();
-
-        $total = Event::count();
+        $total = News::count();
         $totalPages = ceil($total / $itemsPage);
 
-        return view('home', compact('events', 'totalPages'));
+        return view('home', compact('news', 'slideItems', 'page', 'totalPages'));
     }
 
     public function indexEvent(Request $request)
