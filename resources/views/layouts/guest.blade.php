@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/@material-tailwind/html/scripts/tooltip.js'])
 </head>
 
 <body class="font-sans antialiased">
@@ -27,16 +27,24 @@
                     <div class="flex">
                         <div class="shrink-0 flex items-center">
                             <a href="{{ route('home') }}">
-                                <x-application-logo class="block h-9 w-auto rounded-full fill-current" />
+                                <x-application-logo class="block h-10 sm:h-12 w-auto rounded-full fill-current" />
                             </a>
+                            @if (request()->routeIs('home'))
+                                <h5 class="hidden sm:block font-semibold text-md lg:text-xl text-gray-800 font-sans">
+                                    Sobat Sehat
+                                </h5>
+                            @else
+                                <h5 class="font-semibold text-md sm:text-xl text-gray-800 font-sans">Sobat Sehat
+                                </h5>
+                            @endif
                         </div>
 
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 md:flex">
                             <x-nav-link :href="route('home')" :active="request()->routeIs('home')">
                                 {{ __('Beranda') }}
                             </x-nav-link>
                         </div>
-                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                        <div class="hidden space-x-8 sm:-my-px sm:ms-10 md:flex">
                             <x-nav-link :href="route('kegiatan')" :active="request()->routeIs('kegiatan')">
                                 {{ __('Kegiatan & Acara') }}
                             </x-nav-link>
@@ -60,7 +68,7 @@
                             </form>
                         @else
                             <form action="{{ route('kegiatan.search') }}" method="GET"
-                                class="block relative w-full drop-shadow">
+                                class="relative w-full drop-shadow me-4 sm:me-1 md:me-0">
                                 <input type="text" name="search" placeholder="Cari acara. . ."
                                     value="{{ request()->input('search') }}"
                                     class="appearance-none rounded-md border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-xs placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
@@ -75,20 +83,21 @@
                         @endif
 
                         @guest
-                            <div class="hidden ps-6 w-full sm:flex sm:items-center sm:ms-6">
+                            <div class="hidden ps-6 w-full md:flex sm:items-center sm:ms-6">
                                 @if (Route::has('login'))
                                     <a href="{{ route('login') }}"
-                                        class="font-medium text-gray-400 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500">Log
-                                        in</a>
+                                        class="font-medium text-gray-400 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500"
+                                        data-ripple-light="true" data-tooltip-target="tooltip-login">Log in</a>
                                 @endif
                                 <div class="ml-3 font-light text-gray-400"> | </div>
                                 @if (Route::has('register'))
                                     <a href="{{ route('register') }}"
-                                        class="ml-3 font-medium text-gray-400 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500">Register</a>
+                                        class="ml-3 font-medium text-gray-400 hover:text-gray-900 focus:outline focus:outline-2 focus:rounded-sm focus:outline-blue-500"
+                                        data-ripple-light="true" data-tooltip-target="tooltip-register">Register</a>
                                 @endif
                             </div>
                         @else
-                            <div class="hidden sm:flex sm:items-center sm:ms-6 w-full">
+                            <div class="hidden md:flex sm:items-center sm:ms-6 w-full">
                                 <x-dropdown align="right" width="48">
                                     <x-slot name="trigger">
                                         <button
@@ -133,8 +142,32 @@
                                 </x-dropdown>
                             </div>
                         @endguest
+                        @if (request()->routeIs('kegiatan'))
+                            <div class="absolute -top-96 w-64">
+                                <div data-tooltip="tooltip-register" data-tooltip-placement="bottom"
+                                    class="absolute z-50 whitespace-normal break-words rounded-lg bg-gray-300 py-1.5 px-3 font-sans text-sm font-normal text-black focus:outline-none">
+                                    Register Kontributor Acara
+                                </div>
+                                <div data-tooltip="tooltip-login" data-tooltip-placement="bottom"
+                                    class="absolute z-50 whitespace-normal break-words rounded-lg bg-gray-300 py-1.5 px-3 font-sans text-sm font-normal text-black focus:outline-none">
+                                    Login Kontributor Acara
+                                </div>
+                            </div>
+                        @elseif (request()->routeIs('home'))
+                            <div class="absolute -top-96 w-[480px]">
+                                <div data-tooltip="tooltip-register" data-tooltip-placement="bottom"
+                                    class="absolute z-50 whitespace-normal break-words rounded-lg bg-gray-300 py-1.5 px-3 font-sans text-sm font-normal text-black focus:outline-none">
+                                    Register Kontributor Acara
+                                </div>
+                                <div data-tooltip="tooltip-login" data-tooltip-placement="bottom"
+                                    class="absolute z-50 whitespace-normal break-words rounded-lg bg-gray-300 py-1.5 px-3 font-sans text-sm font-normal text-black focus:outline-none">
+                                    Login Kontributor Acara
+                                </div>
+                            </div>
+                        @endif
 
-                        <div class="-me-2 flex items-center sm:hidden">
+
+                        <div class="-me-2 flex items-center md:hidden">
                             <button @click="open = ! open"
                                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
                                 <svg class="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
@@ -150,7 +183,7 @@
                     </div>
                 </div>
 
-                <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
+                <div :class="{ 'block': open, 'hidden': !open }" class="hidden md:hidden">
                     <div class="pt-2 pb-3 space-y-1">
                         <x-responsive-nav-link :href="route('home')" :active="request()->routeIs('home')">
                             {{ __('Beranda') }}
