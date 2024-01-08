@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MemberController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 
 use App\Http\Controllers\NewsController;
 
@@ -33,8 +33,11 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('news', NewsController::class);
-    Route::resource('events', EventController::class);
+    Route::middleware('can:Admin')->group(function () {
+        Route::resource('events', EventController::class);
+        Route::resource('members', MemberController::class);
+        Route::resource('news', NewsController::class);
+    });
 });
 
 
