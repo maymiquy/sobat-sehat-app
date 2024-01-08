@@ -92,26 +92,21 @@ class HomeController extends Controller
 
     public function searchEvent(Request $request)
     {
-        $itemsPage = 5;
-        $page = $request->input('page', 1);
-        $start = ($page - 1) * $itemsPage;
+        $itemsPerPage = 5;
+        $page = max(1, $request->input('page', 1));
+        $query = $request->input('search', '');
 
-        $query = $request->input('search');
-        $events = Event::query()
+        $eventsQuery = Event::query()
             ->where('event_name', 'like', "%" . $query . "%")
             ->orWhere('location', 'like', "%" . $query . "%")
-            ->orWhere('description', 'like', "%" . $query . "%")
-            ->skip($start)
-            ->take($itemsPage)
+            ->orWhere('description', 'like', "%" . $query . "%");
+
+        $events = $eventsQuery->withCount('members')
+            ->forPage($page, $itemsPerPage)
             ->get();
 
-        $total = Event::query()
-            ->where('event_name', 'like', "%" . $query . "%")
-            ->orWhere('location', 'like', "%" . $query . "%")
-            ->orWhere('description', 'like', "%" . $query . "%")
-            ->count();
-
-        $totalPages = ceil($total / $itemsPage);
+        $total = $eventsQuery->count();
+        $totalPages = ceil($total / $itemsPerPage);
 
         return view('activity', compact('events', 'totalPages', 'page'));
     }
