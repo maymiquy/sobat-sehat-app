@@ -10,18 +10,16 @@
 
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/jpg" sizes="192x192" href="{{ asset('assets/icon/brand.jpg') }}">
 
-    @vite(['resources/css/app.css', 'resources/js/app.js', 'node_modules/@material-tailwind/html/scripts/tooltip.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="font-sans antialiased">
-    <div x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 50 })"
-        :class="{
-            'fixed top-0 transition duration-1000 ease-in': scrolled,
-            'relative transition duration-1000 ease-in-out': !scrolled
-        }"
-        class="z-20 w-full bg-neutral-100">
-        <nav x-data="{ open: false }" class="bg-white drop-shadow-md border-b border-gray-200">
+    <div x-data="{ scrolled: false }" x-init="window.addEventListener('scroll', () => { scrolled = window.scrollY > 1 })"
+        class="z-20 w-full bg-neutral-100 transition-all duration-300 ease-in-out fixed"
+        :class="{ 'top-0 drop-shadow-md': scrolled, 'drop-shadow-sm': !scrolled }">
+        <nav x-data="{ open: false }" class="bg-white border-b border-gray-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-7">
                 <div class="flex justify-between h-16">
                     <div class="flex">
@@ -53,23 +51,10 @@
 
                     <div class="flex items-center">
                         @if (request()->routeIs('kegiatan.search') || request()->routeIs('kegiatan'))
-                            <form action="{{ route('kegiatan.search') }}" method="GET"
-                                class="hidden relative w-full drop-shadow-md">
-                                <input type="text" name="search" placeholder="Cari acara. . ."
-                                    value="{{ request()->input('search') }}"
-                                    class="appearance-none rounded-md border border-gray-400 border-b hidden pl-8 pr-6 py-2 w-full bg-white text-xs placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
-                                <button type="submit" class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" height="12" width="12"
-                                        viewBox="0 0 512 512" class="h-3 w-3 fill-current text-gray-500">
-                                        <path
-                                            d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" />
-                                    </svg>
-                                </button>
-                            </form>
                         @else
                             <form action="{{ route('kegiatan.search') }}" method="GET"
-                                class="relative w-full drop-shadow me-4 sm:me-1 md:me-0">
-                                <input type="text" name="search" placeholder="Cari acara. . ."
+                                class="relative w-full me-4 sm:me-1 md:me-0 shadow-sm">
+                                <input type="text" name="search" placeholder="Cari kegiatan acara. . ."
                                     value="{{ request()->input('search') }}"
                                     class="appearance-none rounded-md border border-gray-400 border-b block pl-8 pr-6 py-2 w-full bg-white text-xs placeholder-gray-400 text-gray-700 focus:bg-white focus:placeholder-gray-600 focus:text-gray-700 focus:outline-none" />
                                 <button type="submit" class="h-full absolute inset-y-0 left-0 flex items-center pl-2">
@@ -240,7 +225,7 @@
     </div>
 
     <!-- Page Content -->
-    <main class="bg-neutral-100">
+    <main class="bg-neutral-100 pb-8 pt-[5rem] md:pb-16 md:pt-24">
         {{ $slot }}
     </main>
 
@@ -249,7 +234,7 @@
             <div class="md:flex md:justify-between">
                 <div class="mb-6 md:mb-0">
                     <a href="#" class="flex items-center">
-                        <img src="{{ asset('assets/icon/brand.jpg') }}" class="h-8 me-3" alt="FlowBite Logo" />
+                        <img src="{{ asset('assets/icon/brand.jpg') }}" class="h-8 me-3" alt="Logo Brand" />
                         <h5 class="self-center text-2xl font-semibold whitespace-nowrap text-gray-700">Sobat Sehat</h5>
                     </a>
                 </div>
