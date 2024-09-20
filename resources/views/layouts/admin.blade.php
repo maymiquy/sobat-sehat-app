@@ -42,7 +42,7 @@
                                 {{ __('Kegiatan') }}
                             </x-nav-link>
                             <x-nav-link :href="route('members.index')" :active="request()->routeIs('members.index')">
-                                {{ __('Member') }}
+                                {{ __('Peserta') }}
                             </x-nav-link>
                         </div>
                     </div>
@@ -111,11 +111,14 @@
                     <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('news')">
+                    <x-responsive-nav-link :href="route('news.index')" :active="request()->routeIs('news')">
                         {{ __('Berita') }}
                     </x-responsive-nav-link>
-                    <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('events')">
+                    <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events')">
                         {{ __('Kegiatan') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('members.index')" :active="request()->routeIs('events')">
+                        {{ __('Peserta') }}
                     </x-responsive-nav-link>
                 </div>
 
@@ -140,7 +143,7 @@
                             <x-responsive-nav-link :href="route('logout')"
                                 onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Log Out') }}
+                                {{ __('Logout') }}
                             </x-responsive-nav-link>
                         </form>
                     </div>
